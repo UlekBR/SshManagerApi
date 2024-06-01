@@ -11,10 +11,10 @@ arch=$(uname -m)
 # Determine a arquitetura e faça o download do arquivo correspondente
 if [[ $arch == "x86_64" || $arch == "amd64" || $arch == "x86_64h" ]]; then
     echo "Sistema baseado em x86_64 (64-bit Intel/AMD)"
-    curl -o "/opt/SshManagerApi/sshmanagerapi" -f "https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/sshmanagerapi"
+    curl -o "/opt/SshManagerApi/sshmanagerapi" -f "https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/sshmanager"
 elif [[ $arch == "aarch64" || $arch == "arm64" || $arch == "armv8-a" ]]; then
     echo "Sistema baseado em arm64 (64-bit ARM)"
-    curl -o "/opt/SshManagerApi/sshmanagerapi" -f "https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/sshmanagerapiarm"
+    curl -o "/opt/SshManagerApi/sshmanagerapi" -f "https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/sshmanagerarm"
 else
     echo "Arquitetura não reconhecida: $arch"
     exit 1

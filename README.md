@@ -12,7 +12,10 @@
 ## Instalação
 
 Para fazer a instalação rode o seguinte comando:
-```bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/install.sh)```
+
+```cgo
+    bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/install.sh)
+```
 
 
 ## Scripts Testados e Suportados
