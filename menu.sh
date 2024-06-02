@@ -82,9 +82,15 @@ get_public_ip() {
 
 # Função para verificar processo
 verificar_processo() {
-    local nome_processo=$1
-    ps aux | grep -q "$nome_processo"
+    nome_processo=$1
+    resultado=$(ps aux)
+    if echo "$resultado" | grep -q "$nome_processo" && echo "$resultado" | grep -q "python"; then
+        return 0
+    else
+        return 1
+    fi
 }
+
 
 nome_do_script="sshmanagerapi"
 
