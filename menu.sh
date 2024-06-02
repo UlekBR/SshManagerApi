@@ -7,63 +7,6 @@ cor_amarela='\033[93m'
 cor_azul='\033[94m'
 cor_reset='\033[0m'
 
-# Funções para manipulação do cache
-
-# Função para adicionar ao cache (genérica)
-adicionar_ao_cache() {
-    tipo=$1
-    chave=$2
-    valor=$3
-    arquivo="/opt/SshManagerApi/${tipo}.txt"
-    cache=$(carregar_cache "$arquivo")
-    cache["$chave"]=$valor
-    salvar_cache "$arquivo" "${cache[@]}"
-}
-
-# Função para remover do cache (genérica)
-remover_do_cache() {
-    tipo=$1
-    chave=$2
-    arquivo="/opt/SshManagerApi/${tipo}.txt"
-    cache=$(carregar_cache "$arquivo")
-    if [[ -n "${cache[$chave]}" ]]; then
-        unset "cache[$chave]"
-        salvar_cache "$arquivo" "${cache[@]}"
-    fi
-}
-
-# Função para obter valor do cache (genérica)
-obter_do_cache() {
-    tipo=$1
-    chave=$2
-    arquivo="/opt/SshManagerApi/${tipo}.txt"
-    cache=$(carregar_cache "$arquivo")
-    echo "${cache[$chave]}"
-}
-
-# Função para carregar cache
-carregar_cache() {
-    arquivo=$1
-    declare -A cache
-    if [[ -e "$arquivo" ]]; then
-        while IFS='=' read -r chave valor; do
-            cache["$chave"]=$valor
-        done < "$arquivo"
-    fi
-    echo "${cache[@]}"
-}
-
-# Função para salvar cache
-salvar_cache() {
-    arquivo=$1
-    shift
-    declare -A cache=("$@")
-    > "$arquivo"
-    for chave in "${!cache[@]}"; do
-        echo "$chave=${cache[$chave]}" >> "$arquivo"
-    done
-}
-
 # Função para obter IP público
 get_public_ip() {
     local url="https://ipinfo.io"
@@ -91,7 +34,6 @@ verificar_processo() {
     fi
 }
 
-
 nome_do_script="sshmanagerapi"
 
 # Loop principal
@@ -103,8 +45,8 @@ while true; do
     if verificar_processo "$nome_do_script"; then
         status="${cor_verde}ativo${cor_reset}"
         acao="Parar"
-        link_sinc="Link de sincronização: http://$(get_public_ip):$(obter_do_cache 'port' 'porta')"
-        token="Token: $(obter_do_cache 'token' 'token')"
+        link_sinc="Link de sincronização: http://$(get_public_ip):$(cat /opt/SshManagerApi/port.txt)"
+        token="Token: $(cat /opt/SshManagerApi/token.txt)"
     else
         status="${cor_vermelha}parado${cor_reset}"
         acao="Iniciar"
@@ -117,9 +59,8 @@ while true; do
     if [[ -n "$link_sinc" ]]; then
         echo -e "\n$link_sinc"
     fi
-
     if [[ -n "$token" ]]; then
-        echo -e "\n$token"
+        echo -e "$token"
     fi
 
     echo -e "\nSelecione uma opção:"
@@ -135,14 +76,14 @@ while true; do
                 sudo systemctl disable sshmanagerapi.service
                 sudo rm /etc/systemd/system/sshmanagerapi.service
                 sudo systemctl daemon-reload
-                remover_do_cache 'port' 'porta'
-                remover_do_cache 'token' 'token'
+                rm -rf /opt/SshManagerApi/port.txt
+                rm -rf /opt/SshManagerApi/token.txt
             else
-                read -p $'\nDigite a porta que deseja usar: ' porta
-                adicionar_ao_cache 'port' 'porta' "$porta"
-                adicionar_ao_cache 'token' 'token' "$(cat /proc/sys/kernel/random/uuid)"
+                read -p $'\nDigite a porta que deseja usar: ' port
+                echo $port >> /opt/SshManagerApi/port.txt
+                echo $(cat /proc/sys/kernel/random/uuid) >> /opt/SshManagerApi/token.txt
                 clear
-                echo -e "Porta escolhida: $(obter_do_cache 'port' 'porta')"
+                echo -e "Porta escolhida: $(cat /opt/SshManagerApi/port.txt)"
 
                 echo "[Unit]
 Description=SshManagerApiService
@@ -159,8 +100,9 @@ WantedBy=multi-user.target" | sudo tee /etc/systemd/system/sshmanagerapi.service
                 sudo systemctl daemon-reload
                 sudo systemctl enable sshmanagerapi.service
                 sudo systemctl start sshmanagerapi.service
+                echo -e "O Link estará no Menu\n"
             fi
-            echo -e "O Link estará no Menu\n"
+            
             read -p "Pressione a tecla enter para voltar ao menu "
             ;;
         0)
