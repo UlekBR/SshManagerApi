@@ -9,12 +9,13 @@
 - [Uso](#uso)
 - [Créditos](#créditos)
 
+
 ## Instalação
 
 Para fazer a instalação rode o seguinte comando:
 
 ```cgo
-    bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/install.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/install.sh)
 ```
 
 
@@ -23,13 +24,20 @@ Para fazer a instalação rode o seguinte comando:
 - Kirito (SshPlus)
 
 ## Uso
+- Para o uso é necessario a url do servidor e o token, ambos podem ser encontrados no menu da api após a instalação e inicialização
+
+
 
 #### Criar Usuario
 - Requisição para usar **POST**
 - Tipo do PostDATA a enviar **JSON**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     POST -> http://localhost:8080/add_user
+  
     PostData -> {
         "user": "usuario"
         "pass": "senha"  
@@ -47,6 +55,9 @@ Para fazer a instalação rode o seguinte comando:
 - Tipo do dados a enviar **Query Parameters**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     GET -> http://localhost:8080/del_user?user=usuario 
     Em "usuario" será o usuario a ser removido    ^
   
@@ -57,6 +68,9 @@ Para fazer a instalação rode o seguinte comando:
 - Tipo do dados a enviar **Query Parameters**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     GET -> http://localhost:8080/gen_test?minutes=validade 
     Em "validade" será a validade do teste a ser criado ^
     (a validade tem que ser em minutos)
@@ -68,6 +82,9 @@ Para fazer a instalação rode o seguinte comando:
 - Tipo do PostDATA a enviar **JSON**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     POST -> http://localhost:8080/chg_pass
     PostData -> {
         "user": "usuario"
@@ -82,6 +99,9 @@ Para fazer a instalação rode o seguinte comando:
 - Tipo do PostDATA a enviar **JSON**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     POST -> http://localhost:8080/chg_limit
     PostData -> {
         "user": "usuario"
@@ -96,6 +116,9 @@ Para fazer a instalação rode o seguinte comando:
 - Tipo do PostDATA a enviar **JSON**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     POST -> http://localhost:8080/chg_val
     PostData -> {
         "user": "usuario"
@@ -110,6 +133,9 @@ Para fazer a instalação rode o seguinte comando:
 - Tipo do dados a enviar **Query Parameters**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     GET -> http://localhost:8080/chk_limit?user=usuario 
     Em "usuario" o usuario a ser consultado
     ``` 
@@ -118,6 +144,9 @@ Para fazer a instalação rode o seguinte comando:
 - Requisição para usar **GET**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     GET -> http://localhost:8080/created_users
     ``` 
 
@@ -126,6 +155,9 @@ Para fazer a instalação rode o seguinte comando:
 - Requisição para usar **GET**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     GET -> http://localhost:8080/online_users
     ``` 
 
@@ -135,6 +167,9 @@ Para fazer a instalação rode o seguinte comando:
 - Requisição para usar **GET**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     GET -> http://localhost:8080/del_expired
     ``` 
 
@@ -142,6 +177,9 @@ Para fazer a instalação rode o seguinte comando:
 - Requisição para usar **GET**
 - Exemplo:
     ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
     GET -> http://localhost:8080/users_report
     ``` 
 
