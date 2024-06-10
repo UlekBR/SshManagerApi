@@ -30,6 +30,6 @@ chmod +x /opt/SshManagerApi/menu.sh
 chmod +x /opt/SshManagerApi/api.sh
 
 # Crie um link simbólico para o script de menu
-ln -s /opt/SshManagerApi/menu.sh /usr/local/bin/menuSshManager
+ln -s /opt/SshManagerApi/menu.sh /usr/local/bin/sshmanager
 
-echo -e "Para iniciar o menu, digite: menuSshManager"
+echo -e "Para iniciar o menu, digite: sshmanager"
