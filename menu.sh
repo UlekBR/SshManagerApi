@@ -27,7 +27,7 @@ get_public_ip() {
 verificar_processo() {
     nome_processo=$1
     resultado=$(ps aux)
-    if echo "$resultado" | grep -q "$nome_processo" && echo "$resultado" | grep -q "python"; then
+    if echo "$resultado" | grep -q "$nome_processo"; then
         return 0
     else
         return 1
