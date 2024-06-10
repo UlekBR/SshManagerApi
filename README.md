@@ -10,6 +10,13 @@
 - [Créditos](#créditos)
 
 
+
+## Notas
+ - Adicionado a função speedtest
+ - Adicionado a função de checkagem de dados de um usuario apenas
+ - Melhorias internas
+ - Melhor verificação de usuario não/existente
+
 ## Instalação
 
 Para fazer a instalação rode o seguinte comando:
@@ -25,7 +32,6 @@ bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/ins
 
 ## Uso
 - Para o uso é necessario a url do servidor e o token, ambos podem ser encontrados no menu da api após a instalação e inicialização
-
 
 
 #### Criar Usuario
@@ -182,6 +188,28 @@ bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/ins
     }
     GET -> http://localhost:8080/users_report
     ``` 
+
+#### Buscar dados de um usuario
+- Requisição para usar **GET**
+- Exemplo:
+    ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
+    GET -> http://localhost:8080/chk_usrdata?user=usuario
+    Em "usuario" o usuario a ser consultado
+    ``` 
+
+#### SpeedTest
+- Requisição para usar **GET**
+- Exemplo:
+    ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
+    GET -> http://localhost:8080/speedtest
+    ``` 
+  Esse é um dos que mais demoram, em todos meus testes no local host, tive uma media de 30s para a resposta, então, seja paciente.
 
 
 ## Créditos
