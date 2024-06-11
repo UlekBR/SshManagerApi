@@ -27,7 +27,6 @@ curl -o "/opt/SshManagerApi/api.sh" -f "https://raw.githubusercontent.com/UlekBR
 # Dê permissão de execução aos scripts
 chmod +x /opt/SshManagerApi/sshmanagerapi
 chmod +x /opt/SshManagerApi/menu.sh
-chmod +x /opt/SshManagerApi/api.sh
 
 # Crie um link simbólico para o script de menu
 ln -s /opt/SshManagerApi/menu.sh /usr/local/bin/sshmanager
