@@ -72,10 +72,13 @@ while true; do
     case $option in
         1)
             if verificar_processo "$nome_do_script"; then
-                sudo systemctl stop sshmanagerapi.service
-                sudo systemctl disable sshmanagerapi.service
-                sudo rm /etc/systemd/system/sshmanagerapi.service
-                sudo systemctl daemon-reload
+                pkill -9 "sshmanagerapi" >/dev/null 2>&1 &
+
+                crontab -l > /opt/SshManagerApi/cronfile
+                sed -i '/sshmanager/d' /opt/SshManagerApi/cronfile
+                crontab /opt/SshManagerApi/cronfile
+                rm /opt/SshManagerApi/cronfile
+
                 rm -rf /opt/SshManagerApi/port.txt
                 rm -rf /opt/SshManagerApi/token.txt
             else
@@ -85,21 +88,12 @@ while true; do
                 clear
                 echo -e "Porta escolhida: $(cat /opt/SshManagerApi/port.txt)"
 
-                echo "[Unit]
-Description=SshManagerApiService
-After=network.target
+                crontab -l > /opt/SshManagerApi/cronfile
+                echo "@reboot sleep 30s && /opt/SshManagerApi/sshmanagerapi" >> /opt/SshManagerApi/cronfile
+                crontab /opt/SshManagerApi/cronfile
+                rm /opt/SshManagerApi/cronfile
+                /opt/SshManagerApi/sshmanagerapi >/dev/null 2>&1 &
 
-[Service]
-Type=simple
-ExecStart=/opt/SshManagerApi/api.sh
-Restart=always
-
-[Install]
-WantedBy=multi-user.target" | sudo tee /etc/systemd/system/sshmanagerapi.service > /dev/null
-
-                sudo systemctl daemon-reload
-                sudo systemctl enable sshmanagerapi.service
-                sudo systemctl start sshmanagerapi.service
                 echo -e "O Link estará no Menu\n"
             fi
             
