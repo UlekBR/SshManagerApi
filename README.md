@@ -34,6 +34,18 @@ bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/ins
 - Para o uso é necessario a url do servidor e o token, ambos podem ser encontrados no menu da api após a instalação e inicialização
 
 
+
+#### Checkar servidor
+- Requisição para usar **GET**
+- Exemplo:
+    ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
+    GET -> http://localhost:8080/check
+    ```
+- A resposta será que o token não corresponde ou operando
+    
 #### Criar Usuario
 - Requisição para usar **POST**
 - Tipo do PostDATA a enviar **JSON**
