@@ -22,7 +22,6 @@ fi
 
 # Faça o download de outros scripts necessários
 curl -o "/opt/SshManagerApi/menu.sh" -f "https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/menu.sh"
-curl -o "/opt/SshManagerApi/api.sh" -f "https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/api.sh"
 
 # Dê permissão de execução aos scripts
 chmod +x /opt/SshManagerApi/sshmanagerapi
