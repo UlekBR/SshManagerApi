@@ -12,6 +12,7 @@
 
 
 ## Notas
+ - Adicionado a função dos usuarios onlines 
  - Adicionado a função speedtest
  - Adicionado a função de checkagem de dados de um usuario apenas
  - Melhorias internas
@@ -201,6 +202,16 @@ bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/ins
     GET -> http://localhost:8080/users_report
     ``` 
 
+#### Relatorio de usuarios online
+- Requisição para usar **GET**
+- Exemplo:
+    ```cgo
+    Headers -> {
+      "Token": "<token>"
+    }
+    GET -> http://localhost:8080/online_report
+    ```
+    
 #### Buscar dados de um usuario
 - Requisição para usar **GET**
 - Exemplo:
