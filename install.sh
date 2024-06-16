@@ -16,6 +16,9 @@ verificar_processo() {
 if [ -d "/opt/SshManagerApi" ]; then
     if verificar_processo "sshmanagerapi"; then
         pkill -9 "sshmanagerapi" >/dev/null 2>&1 &
+
+        rm -rf /opt/SshManagerApi/sshmanagerapi
+        rm -rf /opt/SshManagerApi/menu.sh
         arch=$(uname -m)
         # Determine a arquitetura e faça o download do arquivo correspondente
         if [[ $arch == "x86_64" || $arch == "amd64" || $arch == "x86_64h" ]]; then
@@ -41,6 +44,8 @@ if [ -d "/opt/SshManagerApi" ]; then
 
 
     else
+        rm -rf /opt/SshManagerApi/sshmanagerapi
+        rm -rf /opt/SshManagerApi/menu.sh
         arch=$(uname -m)
         # Determine a arquitetura e faça o download do arquivo correspondente
         if [[ $arch == "x86_64" || $arch == "amd64" || $arch == "x86_64h" ]]; then
