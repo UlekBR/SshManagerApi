@@ -12,12 +12,9 @@
 
 
 ## Notas
- - Adicionado a função dos usuarios onlines 
- - Adicionado a função speedtest
- - Adicionado a função de checkagem de dados de um usuario apenas
+ - Adicionado um simples sistema para facilitar na logica de revendedores
+ - Correções em algumas funções
  - Melhorias internas
- - Melhor verificação de usuario não/existente
-
 ## Instalação
 
 Para fazer a instalação rode o seguinte comando:
@@ -29,24 +26,13 @@ bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/ins
 
 ## Scripts Testados e Suportados
 - DragonCoreSsh
+- Crazy (SshPlusPro)
 - Kirito (SshPlus)
 
 ## Uso
 - Para o uso é necessario a url do servidor e o token, ambos podem ser encontrados no menu da api após a instalação e inicialização
 
 
-
-#### Checkar servidor
-- Requisição para usar **GET**
-- Exemplo:
-    ```cgo
-    Headers -> {
-      "Token": "<token>"
-    }
-    GET -> http://localhost:8080/check
-    ```
-- A resposta será que o token não corresponde ou operando
-    
 #### Criar Usuario
 - Requisição para usar **POST**
 - Tipo do PostDATA a enviar **JSON**
@@ -56,6 +42,10 @@ bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/ins
       "Token": "<token>"
     }
     POST -> http://localhost:8080/add_user
+  
+     >> caso for para adicionar para revendedor, adicione ?reseller=<name>
+    caso esse revendedor não exista, ele automaticamente cria, e fica armazenado em:
+    /opt/SshManagerApi/reseller/<resellerName>
   
     PostData -> {
         "user": "usuario"
@@ -77,6 +67,9 @@ bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/ins
     Headers -> {
       "Token": "<token>"
     }
+  
+     >> caso for para remover do revendedor, adicione ?reseller=<name>
+  
     GET -> http://localhost:8080/del_user?user=usuario 
     Em "usuario" será o usuario a ser removido    ^
   
@@ -91,6 +84,11 @@ bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/ins
       "Token": "<token>"
     }
     GET -> http://localhost:8080/gen_test?minutes=validade 
+  
+     >> caso for para gerar para revendedor, adicione ?reseller=<name>
+    caso esse revendedor não exista, ele automaticamente cria, e fica armazenado em:
+    /opt/SshManagerApi/reseller/<resellerName>
+  
     Em "validade" será a validade do teste a ser criado ^
     (a validade tem que ser em minutos)
     ``` 
@@ -200,6 +198,9 @@ bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/ins
       "Token": "<token>"
     }
     GET -> http://localhost:8080/users_report
+    
+     >> caso for para buscar apenas o de um revendedor, adicione ?reseller=<name>
+  
     ``` 
 
 #### Relatorio de usuarios online
@@ -210,8 +211,12 @@ bash <(wget -qO- https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/ins
       "Token": "<token>"
     }
     GET -> http://localhost:8080/online_report
-    ```
     
+     >> caso for para buscar apenas o de um revendedor, adicione ?reseller=<name>
+  
+    ``` 
+
+
 #### Buscar dados de um usuario
 - Requisição para usar **GET**
 - Exemplo:
