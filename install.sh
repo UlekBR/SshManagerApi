@@ -35,8 +35,13 @@ case $arch in
 esac
 
 # Baixa os arquivos necessários
-curl -o "/opt/SshManagerApi/sshmanagerapi" -f "$arquivo_ssh"
-curl -o "/opt/SshManagerApi/menu.sh" -f "https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/menu.sh"
+# Baixe o arquivo para um local temporário
+curl -L -f -o "/tmp/sshmanagerapi" "$arquivo_ssh"
+curl -L -f -o "/tmp/menu.sh" "https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/menu.sh"
+
+# Mova os arquivos temporários para o destino final
+mv /tmp/sshmanagerapi /opt/SshManagerApi/sshmanagerapi
+mv /tmp/menu.sh /opt/SshManagerApi/menu.sh
 
 # Dá permissão de execução aos scripts
 chmod +x /opt/SshManagerApi/sshmanagerapi
