@@ -41,9 +41,6 @@ wget -O "/tmp/menu.sh" "https://raw.githubusercontent.com/UlekBR/SshManagerApi/m
 mv /tmp/sshmanagerapi /opt/SshManagerApi/sshmanagerapi
 mv /tmp/menu.sh /opt/SshManagerApi/menu.sh
 
-rm /tmp/sshmanagerapi
-rm /tmp/menu.sh 
-
 
 # Dá permissão de execução aos scripts
 chmod +x /opt/SshManagerApi/sshmanagerapi
