@@ -15,7 +15,6 @@ mkdir -p /opt/SshManagerApi
 
 # Atualiza os repositórios e instala o curl se necessário
 apt update
-apt install -y wget
 
 # Determina a arquitetura do sistema
 arch=$(uname -m)
@@ -35,8 +34,16 @@ case $arch in
 esac
 
 # Baixa os arquivos necessários
-wget -O "/opt/SshManagerApi/sshmanagerapi" "$arquivo_ssh"
-wget -O "/opt/SshManagerApi/menu.sh" "https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/menu.sh"
+wget -O "/tmp/sshmanagerapi" "$arquivo_ssh"
+wget -O "/tmp/menu.sh" "https://raw.githubusercontent.com/UlekBR/SshManagerApi/main/menu.sh"
+
+# Mova os arquivos temporários para o destino final
+mv /tmp/sshmanagerapi /opt/SshManagerApi/sshmanagerapi
+mv /tmp/menu.sh /opt/SshManagerApi/menu.sh
+
+rm /tmp/sshmanagerapi
+rm /tmp/menu.sh 
+
 
 # Dá permissão de execução aos scripts
 chmod +x /opt/SshManagerApi/sshmanagerapi
