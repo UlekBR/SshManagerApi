@@ -12,8 +12,7 @@
 
 
 ## Notas
- - Adicionado um simples sistema para facilitar na logica de revendedores
- - Correções em algumas funções
+ - Correção no relatorio, e no checkuser 
  - Melhorias internas
 ## Instalação
 
