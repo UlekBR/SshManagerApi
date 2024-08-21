@@ -9,7 +9,7 @@ cor_reset='\033[0m'
 
 # Função para obter IP público
 get_public_ip() {
-    local url="https://ipinfo.io"
+    local url="https://ipapi.co/json"
     local response=$(curl -s "$url")
     if [[ $? -eq 0 ]]; then
         local ip=$(echo "$response" | grep -oP '"ip": "\K[^"]+')
@@ -39,7 +39,7 @@ nome_do_script="sshmanagerapi"
 # Loop principal
 while true; do
     clear
-    echo -e "S-S-H--M-A-N-A-G-E-R  Versão: 0.0.4 - BETA"
+    echo -e "S-S-H--M-A-N-A-G-E-R  Versão: 0.0.5 - BETA"
     echo -e "By @UlekBR"
 
     if verificar_processo "$nome_do_script"; then
