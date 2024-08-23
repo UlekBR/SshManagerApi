@@ -15,6 +15,7 @@ mkdir -p /opt/SshManagerApi
 
 # Atualiza os repositórios e instala o curl se necessário
 apt update
+apt install at
 
 # Determina a arquitetura do sistema
 arch=$(uname -m)
