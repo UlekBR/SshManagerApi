@@ -39,7 +39,7 @@ nome_do_script="sshmanagerapi"
 # Loop principal
 while true; do
     clear
-    echo -e "S-S-H--M-A-N-A-G-E-R  Versão: 0.0.5 - BETA"
+    echo -e "S-S-H--M-A-N-A-G-E-R  Versão: 0.0.6 - BETA"
     echo -e "By @UlekBR"
 
     if verificar_processo "$nome_do_script"; then
